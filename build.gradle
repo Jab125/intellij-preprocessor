@@ -4,7 +4,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.10'
 }
 
-group 'dev.falsehonesty'
+group 'dev.jab125'
 version '0.6.2'
 
 repositories {
@@ -42,6 +42,6 @@ patchPluginXml {
     untilBuild = "223.*"
 }
 //
-//publishPlugin {
-//    token intellijPublishToken
-//}
+publishPlugin {
+    token intellijPublishToken
+}
