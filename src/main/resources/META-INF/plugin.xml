@@ -1,9 +1,10 @@
 <idea-plugin>
     <id>dev.falsehonesty.intellij-preprocessor</id>
-    <name>Preprocessor Support</name>
-    <vendor email="thefalsehonesty@gmail.com" url="https://chattriggers.com">FalseHonesty</vendor>
+    <name>Preprocessor Support+</name>
+    <vendor url="https://jab125.dev">Jab125</vendor>
 
     <description><![CDATA[
+    Original by FalseHonestly.
     An IntelliJ plugin to add support for comment-based
     <a href="https://github.com/ReplayMod/preprocessor">preprocessor macros</a>.
     ]]></description>

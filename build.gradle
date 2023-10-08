@@ -1,11 +1,11 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.7.2'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'org.jetbrains.intellij' version '1.15.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
 }
 
 group 'dev.falsehonesty'
-version '0.6.1'
+version '0.6.2'
 
 repositories {
     mavenCentral()
@@ -13,31 +13,35 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '211.6693.111'
-    plugins 'java', 'Kotlin'
+    version = "2022.1.1"
+    plugins = ['java', 'Kotlin']
+}
+
+compileJava {
+    targetCompatibility = "11"
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
-
+//
 patchPluginXml {
-    changeNotes """
-      Add support for 2021.1"""
+    changeNotes = """
+      Add support for 2022.1 to 2022.3"""
     // please see https://jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description
-    sinceBuild "201.6487"
-    untilBuild "211.*"
+    sinceBuild = "221.5591"
+    untilBuild = "223.*"
 }
-
-publishPlugin {
-    token intellijPublishToken
-}
+//
+//publishPlugin {
+//    token intellijPublishToken
+//}

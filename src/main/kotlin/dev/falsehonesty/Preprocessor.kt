@@ -2,10 +2,12 @@ package dev.falsehonesty
 
 val ALLOWED_TYPES = listOf("JAVA", "KOTLIN")
 
-enum class PreprocessorState {
-    NONE,
-    IF,
-    ELSE
+class PreprocessorState {
+    companion object {
+        val NONE = PreprocessorState()
+        val IF = PreprocessorState()
+        val ELSE = PreprocessorState()
+    }
 }
 
 enum class PreprocessorDirective {

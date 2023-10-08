@@ -10,6 +10,7 @@ import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.colors.EditorColorsManager
+import com.intellij.openapi.editor.colors.EditorColorsScheme
 import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory
@@ -180,10 +181,19 @@ class PreprocessorHighlightVisitor(private val project: Project) : HighlightVisi
         var token = lexer.tokenType
 
         while (token != null) {
-            val attributes = highlighter.getTokenHighlights(token)
-                .fold(TextAttributes(null, null, null, null, 0)) { first, second ->
-                    TextAttributes.merge(first, SCHEME.getAttributes(second))
+            val attributes1 = SCHEME.getAttributes(DefaultLanguageHighlighterColors.IDENTIFIER).clone()
+            attributes1.backgroundColor = SCHEME.getColor(DefaultLanguageHighlighterColors.DOC_COMMENT_GUIDE)
+            var attributes = highlighter.getTokenHighlights(token)
+                .fold(attributes1) { first, second ->
+                    val attributes = SCHEME.getAttributes(second)
+                    if (second == DefaultLanguageHighlighterColors.LINE_COMMENT) {
+                        first
+                    } else {
+                        TextAttributes.merge(first, attributes)
+                    }
                 }
+
+           // attributes = ;// TextAttributes(null, null, null, null, 0)
 
             val directiveInfo = HighlightInfo
                 .newHighlightInfo(HighlightInfoType.INJECTED_LANGUAGE_FRAGMENT)
@@ -252,7 +262,7 @@ class PreprocessorHighlightVisitor(private val project: Project) : HighlightVisi
 
     companion object {
         val BOLD_ATTRIBUTE = TextAttributes(null, null, null, null, Font.BOLD)
-        val SCHEME = EditorColorsManager.getInstance().globalScheme
+        val SCHEME: EditorColorsScheme  inline get() { return EditorColorsManager.getInstance().globalScheme }
 
         val DIRECTIVE_COLOR = DefaultLanguageHighlighterColors.KEYWORD
         val DIRECTIVE_ATTRIBUTES = TextAttributes.merge(SCHEME.getAttributes(DIRECTIVE_COLOR), BOLD_ATTRIBUTE)
