@@ -10,9 +10,9 @@ class PreprocessorState {
     }
 }
 
-enum class PreprocessorDirective {
-    IF,
-    IFDEF,
-    ELSE,
-    ENDIF
-}
+//enum class PreprocessorDirective {
+//    IF,
+//    IFDEF,
+//    ELSE,
+//    ENDIF
+//}
