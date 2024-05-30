@@ -284,7 +284,7 @@ class PreprocessorHighlightVisitor(private val project: Project) : HighlightVisi
 
         private val WHITESPACES_PATTERN = "\\s+".toRegex()
         private val EXPR_PATTERN = "(.+)(==|!=|<=|>=|<|>)(.+)".toRegex()
-        private val IDENTIFIER_PATTERN = "[A-Za-z0-9]+".toRegex()
+        private val IDENTIFIER_PATTERN = "^[A-Za-z0-9:\\-+!?]+".toRegex()
         private val OR_PATTERN = Pattern.quote("||")
         private val AND_PATTERN = Pattern.quote("&&")
         private val SPLIT_PATTERN = Pattern.compile("$OR_PATTERN|$AND_PATTERN")
